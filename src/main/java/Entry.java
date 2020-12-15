@@ -107,4 +107,9 @@ public class Entry implements Comparable<Entry> {
         String name = toString();
         return name.compareTo(entry.toString());
     }
+
+    public boolean matches(String filter) {
+        String pattern = firstName + " " + lastName + " " + street + " " + city + " " + zip + " " + email;
+        return pattern.contains(filter);
+    }
 }

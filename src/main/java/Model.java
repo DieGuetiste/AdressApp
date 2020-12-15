@@ -14,6 +14,7 @@ public class Model {
 
     public Model() throws Exception {
         loadData();
+        entries.addAll(Randomizer.getRandomEntries(50));
         entries.sort(Entry::compareTo);
     }
 
@@ -42,12 +43,18 @@ public class Model {
         JSONArray array = (JSONArray) parser.parse(builder.toString());
         array.forEach(o -> {
             entries.removeAll();
-
             entries.add(Entry.fromJson((JSONObject) o));
-
         });
 
     }
 
 
+    public void add(Entry entry) {
+        entries.add(entry);
+        try {
+            saveData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
